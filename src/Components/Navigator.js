@@ -2,8 +2,6 @@ import {useState} from 'react'
 
 export default function Navigator() {
     const [modeswitch,setMode] = useState(true)
-    const [tempchange,setTemp] = useState(true) // only way i can make it work
-    console.log(modeswitch)
     return(
         <nav className=" flex flex-row h-20 w-screen bg-black align-middle p-5 justify-center">
             <h1 className="modeswitch" onClick={()=>setMode(prev =>!prev)}>
