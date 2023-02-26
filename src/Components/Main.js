@@ -46,6 +46,9 @@ export default function Main(Prop){
     .then(res => res.json());
     console.log('other:')
     console.log(other)
+    // this loop adds the other user rating to the primary user array. i use thismethod cause thats the only thing we need from the other user.
+    // it compares the names of the movies to collect the rating, it may produce errors if one or more movies share the same name.
+    //Thankfully the error will just be incorrect ranking.
     for(let i =0; i<other.length;i++){
       let answer = await user.findIndex((position)=> position.Name === other[i].Name);
       if(answer !== -1){
@@ -99,7 +102,7 @@ return(
                   <option value={"imdb"}>IMDB</option>
                   <option value={"letterboxd"}>LETTERBOXD</option>
               </select>
-              <input type="text" className={`rounded bg-white h-10 w-48 ${pages.user.mode ==='imdb' && !RegexForUR.test(pages.user.name) ? `border-4 border-red-600`:``}`} onChange={(e)=> setPages((prev) =>{
+              <input type="text" className={`rounded bg-white h-10 w-48 ${(pages.user.mode ==='imdb' && !RegexForUR.test(pages.user.name))  ? `border-4 border-red-600`:``}`} onChange={(e)=> setPages((prev) =>{
               let updated = {...prev};
               updated.user.name = e.target.value;
               return updated

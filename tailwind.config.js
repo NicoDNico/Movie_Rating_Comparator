@@ -5,6 +5,9 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    fontFamily:{
+      gloock:["Gloock","cursive"]
+    },
     screens:{
       'less':'400px',
       'sm': '640px',
