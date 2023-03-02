@@ -27,6 +27,8 @@ code {
   line-height: 1;
   margin: 0;
   padding: 0;
+  transition-duration: 300ms;
+  position: inherit;
 }
 
 .rating > span {
@@ -35,8 +37,9 @@ code {
   display: inline-block;
   margin-right: 5px;
   z-index: 0;
+
 } 
-.rating:hover > span {
+.rating:hover{
   margin-bottom: 1.1rem;
 }
 

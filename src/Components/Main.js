@@ -22,13 +22,7 @@ export default function Main(Prop){
   // Somebody once toll me the world is gonna roll me if i use async in Reactttttt
   // believe me i tried its to much for me, god bless those who can understand how chaining promises work.
   async function runTest(){
-    let test2 = await fetch("https://api.themoviedb.org/3/search/multi?api_key=5625c97a465184ed5c6509459a4505fb&language=en-US&query=city%of%god").then(response => response.json());
-    let results = test2.results  
-    results.forEach(result => {
-      if(result.poster_path !== null )
-        console.log(result)
-      
-    });
+    console.log(stats)
   }
   async function runMain(){
     // Cheking if the imdb UR is correct
@@ -41,11 +35,13 @@ export default function Main(Prop){
     .then(res => res.json());
     console.log('user:')
     console.log(user)
+    setStats(prev=>[user])
     // call to api to fetch the other user data
     let other = await fetch('https://erzgg8cp3a.execute-api.us-east-1.amazonaws.com/Prod/'+pages.other.mode+'/'+pages.other.name,{headers:{'x-api-key':'0fg31ilvDCl0fdZfhum82clS7J1ad0j3booSddQb'}})
     .then(res => res.json());
     console.log('other:')
     console.log(other)
+    setStats(prev=> prev.push(other))
     // this loop adds the other user rating to the primary user array. i use thismethod cause thats the only thing we need from the other user.
     // it compares the names of the movies to collect the rating, it may produce errors if one or more movies share the same name.
     //Thankfully the error will just be incorrect ranking.
@@ -88,7 +84,7 @@ return(
         <ul className='flex flex-col place-items-center gap-2 sm:gap-4 sm:flex-row  p-5 pt-10 sm:justify-center  text-white'>
           <button className={button}  onClick={runTest}> test</button>
           <button className={button}  onClick={Find}> find Hot Fuzz</button>
-          <button className={button}  onClick={runMain}> run main</button>
+          <button className={button}  onClick={runMain}>Launch Comparator</button>
           <button className={button}  onClick={runStats}>Get Stats</button>
         </ul>
         <div className='collectorMain flex flex-col sm:flex-row justify-center gap-5 sm:gap-20 md:gap-32 mt-10 font-mono font-bold text-xl'>
@@ -129,7 +125,7 @@ return(
               }></input>
           </div>
         </div>
-        <ul className="grid gap-4 mx-20 pt-10  xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
+        <ul className="grid gap-4 mx-20 pt-10  xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 ">
             {list}
         </ul>
         <HelpImg/>

@@ -24,7 +24,8 @@ export default function Rating(Props) {
       </span>
       )
   }
-    return <div className="rating">
+    return (
+    <div className="rating">
       <span>
       {starsUser}
         <span className="rating-number">
@@ -37,5 +38,5 @@ export default function Rating(Props) {
           ({starsOther.length})
         </span>
       </div>
-    </div>;
+    </div>);
   }
