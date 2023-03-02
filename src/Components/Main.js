@@ -1,11 +1,11 @@
 import React ,{useState} from 'react'
 import Poster from './Poster'
 import Test from './Test'
-
+import HelpImg from './HelpIMG'
 export default function Main(Prop){
   // maybe this is to many states but whatever.
-  const examplePoster = <Poster name={"the hunt"} img='https://i.pinimg.com/originals/60/83/1f/60831f185c65c38a5942444339f5d95a.png' key={'testkey'} primaryStars={10} secondaryStars={"Not seen/played" && 10} year={"2012"} />
-  const [list, setList] = useState([examplePoster]); //this list will contain all the movies and their names ranking of both users and img
+  const examplePoster = <Poster load='lazy' name={"the hunt"} img='https://i.pinimg.com/originals/60/83/1f/60831f185c65c38a5942444339f5d95a.png' key={'testkey'} primaryStars={10} secondaryStars={"Not seen/played" && 10} year={"2012"} />
+  const [list, setList] = useState([]); //this list will contain all the movies and their names ranking of both users and img
   const [pages ,setPages] = useState({
     user:{mode:'imdb', name:""},
     other:{mode:'imdb', name:""}
@@ -132,6 +132,7 @@ return(
         <ul className="grid gap-4 mx-20 pt-10  xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
             {list}
         </ul>
+        <HelpImg/>
         {/* <Test/> */}
     </main>
 )

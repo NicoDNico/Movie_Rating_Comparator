@@ -21,4 +21,41 @@ code {
     monospace;
 }
 
+.rating {
+  display:inline-flex;
+  font-size: 1rem;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+}
+
+.rating > span {
+  color: #ccc;
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 5px;
+  z-index: 0;
+} 
+.rating:hover > span {
+  margin-bottom: 1.1rem;
+}
+
+.rating > div.filled {
+  color: #f5b301;
+  cursor: default;
+  position: absolute;
+  z-index: 1;
+  transition: 300ms;
+}
+
+.rating:hover .filled{
+  transform: translateY(1rem);
+}
+.rating-number{
+  opacity: 0;
+  transition: opacity 400ms ease-out ;
+}
+.rating:hover .rating-number{
+  opacity: 1;
+}
 

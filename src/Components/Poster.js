@@ -1,4 +1,5 @@
 import React, {useEffect,useState} from 'react'
+import Rating from './Rating/Rating'
 export default function Poster(Prop){
     const [imgLoad,setImgLoad] = useState(false)
     const apikey='api_key=5625c97a465184ed5c6509459a4505fb';
@@ -8,9 +9,6 @@ export default function Poster(Prop){
         .then((res)=> {
             const results = res.results;
             results.sort((a, b) => b['vote_count'] - a['vote_count'])
-            console.log(Prop.name)
-            console.log(results)
-            console.log(results.length)
             for(let i = 0; i<=results.length;i++){
                 let result = results[i];
                 const titles = result.title;
@@ -26,9 +24,16 @@ export default function Poster(Prop){
         <div key="Prop.key" className="container mx-auto flex flex-col bg-[#2b0071] border-4 border-[#501468] rounded-xl  font-bold font-mono">
             <h1 className='border-l-0 truncate text-2xl text-center stroke-white' style={{}} >{Prop.name}</h1>
             <img  alt={Prop.name} src={imgLoad ? imgLoad: Prop.img}></img>
-            <section>
-            <span className=' flex flex-row justify-start text-lg font-black gap-2 text-white'>{Prop.primaryStars}<p>{Prop.secondaryStars || "Not seen/played"}</p> </span>
+            <section className=''>
+           <Rating totalStars={Prop.primaryStars} filledStars={Prop.secondaryStars} />
             </section>
         </div>
     )
 }
+/* <div key="Prop.key" className="container mx-auto flex flex-col bg-[#2b0071] border-4 border-[#501468] rounded-xl  font-bold font-mono">
+<h1 className='border-l-0 truncate text-2xl text-center stroke-white' style={{}} >{Prop.name}</h1>
+<img  alt={Prop.name} src={imgLoad ? imgLoad: Prop.img}></img>
+<section>
+<span className=' flex flex-row h-10  justify-start text-lg font-black gap-2 text-white truncate'>You'r Score {Prop.primaryStars} Other User Score {Prop.secondaryStars || "Not seen/played"} </span>
+</section>
+</div> */
