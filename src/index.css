@@ -37,7 +37,6 @@ code {
   display: inline-block;
   margin-right: 5px;
   z-index: 0;
-
 } 
 .rating:hover{
   margin-bottom: 1.1rem;
@@ -62,3 +61,21 @@ code {
   opacity: 1;
 }
 
+.arrow-up{
+  display: inline-block;
+  border-top: 1px solid green;
+  border-left: 1px solid green;
+  width: 8px;
+  height: 8px;
+  transform: rotate(45deg);
+}
+
+.arrow-down{
+  display: inline-block;
+  margin-left: 5px;
+  border-bottom: 1px solid red;
+  border-right: 1px solid red;
+  width: 8px;
+  height: 8px;
+  transform: rotate(45deg);
+}
