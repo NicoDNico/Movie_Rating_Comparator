@@ -1,7 +1,6 @@
 import React ,{useState} from 'react'
 import Poster from './Poster'
 import HelpImg from './HelpIMG'
-import PopUp from './Pop-Up/PopUp';
 export default function Main(Prop){
   // maybe this is to many states but whatever.
   const [list, setList] = useState([]); //this list will contain all the movies and their names ranking of both users and img
@@ -11,19 +10,21 @@ export default function Main(Prop){
     other:{mode:'letterboxd', name:""}
   }) // this state is kinda useless but i was told to always use state before using vanilla js to extract info from inputs
   const [stats, setStats] = useState([]); // here will be store the miscallenous info the page will show if you want to know some basic stats of both users.
-  const [popUp,setPop] = useState(false);
+  const [popUpHide,setPop] = useState(false);
   const RegexForUR = /^ur/i; // i need this to check the validity of the imdb input
 
+  function PopUp(){
+    return (
+      <div className={popUpHide?' flex flex-col fixed w-full h-full justify-center align-middle items-center':'invisible'}>
+        <div className='bg-white z-10 h-1/6 w-1/3 '></div>
+        <div onClick={()=>setPop(prev => !prev)} className={'fixed w-full h-full bg-black/50'}></div>
+      </div>
+    )  
+  }
   // Somebody once toll me the world is gonna roll me if i use async in Reactttttt
   // believe me i tried its too much for me, god bless those who can understand how chaining promises work.
   async function runTest(){
-    console.log(list)
-    setList(list.filter((element)=>{
-      if(element.props.secondaryStars !== undefined){
-        return element
-      }
-      return 
-    }));
+    console.log(fetch("http://127.0.0.1:8000/imdb/ur114041753").then(res=>res.json))
   };
   async function runMain(){
     // Cheking if the imdb UR is correct
@@ -66,7 +67,7 @@ export default function Main(Prop){
         if(element.props.secondaryStars !== undefined){
           return element
         }
-        return
+        return 
       }).map(((movie,i)=>{
         return(
           <Poster name={movie.Name} Link={movie.Link} img='https://i.pinimg.com/originals/60/83/1f/60831f185c65c38a5942444339f5d95a.png' key={i} primaryStars={movie.Rating} secondaryStars={"Not seen/played" && movie.Other} year={movie.Date.slice(0,3)} />
@@ -86,11 +87,11 @@ export default function Main(Prop){
   }
   let button = "rounded bg-[#2b0071] h-10 w-20 text-center duration-500 hover:h-20 hover:w-40  "
 return(
-    <main className="flex flex-col  min-h-screen bg-[#150050]  ">
-      {popUp && <PopUp handleClick={()=>{setPop(prev=>!prev)}}/>}
-      <ul className='flex flex-col place-items-center gap-2 sm:gap-4 sm:flex-row  p-5 pt-10 sm:justify-center  text-white'>
-          {/* <button className={button}  onClick={runTest}> test</button>
-          <button className={button}  onClick={runStats}>Get Stats</button> */}
+    <main className="flex flex-col h-full min-w-full bg-[#150050]  ">
+      <PopUp/>
+      <ul className='flex flex-col place-items-center gap-2 sm:gap-4 sm:flex-row  p-5 sm:justify-center  text-white'>
+          <button className={button}  onClick={runTest}> test</button>
+          <button className={button}  onClick={runStats}>Get Stats</button>
       </ul>
 
       <div className='collectorMain flex flex-col sm:flex-row justify-center gap-5 sm:gap-20 md:gap-32 mt-10 font-mono font-bold text-xl'>
@@ -116,9 +117,9 @@ return(
         <div className=' flex justify-center items-center flex-col'>
           <button className='rounded bg-[#2b0071] h-10 p-2 text-white'  onClick={runMain}>Compare</button>
           <div onClick={()=>setPop(prev=>!prev)}>
-            <svg class="h-10 w-10 p-2 text-white hover:p-0"  fill="none" viewBox="0 0 24 24" stroke="currentColor" >
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+            <svg className="h-10 w-10 p-2 text-white hover:p-0"  fill="none" viewBox="0 0 24 24" stroke="currentColor" >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
             </svg>
           </div>
         </div>
@@ -149,10 +150,7 @@ return(
       <ul className="grid gap-4 mx-20 pt-10  xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 ">
             {list}
       </ul>
-
       <HelpImg/>
-
-      {/* <Test/> */}
     </main>
 )
 }
