@@ -2,12 +2,12 @@ The only thing needed to run this should be a tmdb api key. that you should put 
 
 INSTRUCTIONS 
 
-1- Get a tmdb api key from them. 
-2- Create a .env file in ./src
-3- Add to the file this REACT_APP_API_KEY="[YOUR KEY]". Add the key between the " and dont add anything else.
-4- Do "npm i" to download all the necesary modules.
-5- Do npm start to run the code once or if you dont need a permanent page. Do npm build and use the html page in public for a longlasting page.
-6- give a star or idk
+1- Get a tmdb api key from them. \n
+2- Create a .env file in ./src/ \n
+3- Add to the file this REACT_APP_API_KEY="[YOUR KEY]". Add the key between the " and dont add anything else.\n
+4- Do "npm i" to download all the necesary modules.\n
+5- Do npm start to run the code once or if you dont need a permanent page. Do npm build and use the html page in public for a longlasting page.\n
+6- give a star or idk.\n
 
 
 TODOS- In importance order
