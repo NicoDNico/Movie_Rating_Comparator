@@ -35,11 +35,11 @@ export default function Rating(Props) {
         )
     };
     return (
-    <div className="rating ">
-      <span className="sm:font-[0.5rem]">
+    <div className="rating whitespace-nowrap">
+      <span className="sm:font-[0.5rem] text-nowrap ">
       {starsUser}
         <span className={(arrow === 'arrow-down')?"arrow-down":''}></span>
-        <span className="rating-number">
+        <span className="rating-number ">
           {starsUserNum}
         </span>
       </span>
