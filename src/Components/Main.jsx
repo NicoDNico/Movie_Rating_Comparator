@@ -21,15 +21,7 @@ export default function Main(Prop){
   // Somebody once toll me the world is gonna roll me if i use async in Reactttttt
   // believe me i tried its too much for me, god bless those who can understand how chaining promises work.
   async function runTest(){
-    if(window.localStorage.getItem("anumess")){
-      console.log("ya esta")
-      console.log(JSON.parse(window.localStorage.getItem("anumess")))
-    }else{
-      console.log("no esta")
-      let x = await (await letterboxdapi({user:"anumess", iteration:1},)).Data
-      window.localStorage.setItem("anumess",JSON.stringify(x))
-      console.log(JSON.parse(x))
-    }
+    imdbApi("ur49546000",)
     
   };
   // this should not be necessary.
@@ -134,6 +126,32 @@ export default function Main(Prop){
       }
   };
   let button = "rounded bg-[#2b0071] h-10 w-20 text-center duration-500 hover:h-20 hover:w-40  "
+
+  async function imdbApi(user,page,prev){
+    let temp
+    let data = prev || []
+    if(page){
+      temp = await axios.get(page)
+    }else{
+      temp = await axios.get("https://www.imdb.com/user/"+user+"/ratings?sort=your_rating,desc&ratingFilter=0&mode=detail&ref_=undefined&lastPosition=0")
+    }
+    let $ = cheerio.load(temp.data);
+    console.log($('.lister-list-length').find('span').text());
+    const molist = $('.lister-item ');
+    molist.each((i,elem)=>{
+      data.push({
+        Title: $(elem).find('img').attr('alt'),
+        Rating:$(elem).find('.lister-item-year').text(),
+        Link:$(elem).find('.ipl-rating-widget').find('.ipl-rating-star--other-user').text().trim()
+      })
+    })
+
+
+
+
+  }
+
+
 return(
 <main className="flex flex-col min-w-full bg-[#150050]  ">
   <div className={lista?'':'hidden'}>
@@ -148,6 +166,7 @@ return(
                   <option value={"ALL"}>ALL</option>
                   <option value={"shared"}>ONLY SHARED</option>
           </select>
+          <button className='rounded bg-[#2b0071] h-10 p-2 text-white'  onClick={()=>runTest()}>test</button>
       </ul>
 
       <div className='collectorMain flex flex-col sm:flex-row justify-center gap-5 sm:gap-20 md:gap-32 mt-10 font-mono font-bold text-xl'>
