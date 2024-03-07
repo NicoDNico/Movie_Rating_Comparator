@@ -3,7 +3,7 @@ import Main from './Components/Main'
 import {useEffect} from 'react'
 function App() {
   useEffect(() => {
-    document.title = "Nicolas Nicora";  
+    document.title = "NicoDNico";  
   }, []);
   return (
     
