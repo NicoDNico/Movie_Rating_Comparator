@@ -13,7 +13,7 @@ INSTRUCTIONS
 
 TODOS- In importance order   
 I will add the option to compare imdb and letterboxd accounts. This would give functionality and also help to get more accurate posters as imdb gives the year each movie released preJS load.    
-~~ Make paginator work consistently. This is the hardest thing i have ever done and i had to rework it 3 times. ~~     
+~~Make paginator work consistently. This is the hardest thing i have ever done and i had to rework it 3 times.~~     
 Add the option to make an electron app without needing to manually add the modules. If you know how you can already do this with electron forge it should work as is.   
 Reduce warnings from webpack. I like yellow but not yellow alerts.
 Improve performance.   
