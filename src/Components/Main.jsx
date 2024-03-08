@@ -145,9 +145,7 @@ export default function Main(Prop){
         Link:$(elem).find('.ipl-rating-widget').find('.ipl-rating-star--other-user').text().trim()
       })
     })
-
-
-
+    
 
   }
 

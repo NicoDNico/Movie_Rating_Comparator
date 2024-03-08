@@ -6,7 +6,9 @@
 .pnp.js
 .env
 # testing
+/test
 /coverage
+.local
 
 # production
 /build
