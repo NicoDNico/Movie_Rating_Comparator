@@ -12,7 +12,7 @@ INSTRUCTIONS
 
 
 TODOS- In importance order   
-~~I will add the option to compare imdb and letterboxd accounts. This would give functionality and also help to get more accurate posters as imdb gives the year each movie released preJS load.~~
+~~I will add the option to compare imdb and letterboxd accounts. This would give functionality and also help to get more accurate posters as imdb gives the year each movie released preJS load.~~   
 ~~Make paginator work consistently. This is the hardest thing i have ever done and i had to rework it 3 times.~~     
 Change how pagination works so it doesnt send a request for each poster to TMDB api as fast as it can. This should drastically solve 429(too many requests) erros while fetching the poster. This is the hardest thing i have ever done i will need to rework it 3 times and im pretty sure the first way i did pagination was better.
 Add the option to make an electron app without needing to manually add the modules. If you know how you can already do this with electron forge it should work as is.   
