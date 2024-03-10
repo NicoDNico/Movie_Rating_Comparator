@@ -3,7 +3,7 @@ The only thing needed to run this should be a tmdb api key. that you should put 
 INSTRUCTIONS 
 
 1- Get a tmdb api key from them.   
-2- Create a .env file in ./src/   
+2- Create a .env file in /root   
 3- Add to the file this REACT_APP_API_KEY="[YOUR KEY]". Add the key between the " and dont add anything else.   
 4- Do "npm i" to download all the necesary modules.   
 4.5- If you plan on using in webrowser and not build in electron you would need to deactivate cors in your preferred way.   
