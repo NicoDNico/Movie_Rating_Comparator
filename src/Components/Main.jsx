@@ -2,7 +2,7 @@ import React ,{useEffect, useState} from 'react'
 import Poster from './Poster'
 import axios from 'axios'
 import HelpImg from './HelpIMG'
-import * as cheerio from 'cheerio';
+import {load} from 'cheerio' ;
 import Pagination from './Pagination/Pagination';
 export default function Main(Prop){
   // maybe this is to many states but whatever.
@@ -21,7 +21,7 @@ export default function Main(Prop){
   // Somebody once toll me the world is gonna roll me if i use async in Reactttttt
   // believe me i tried its too much for me, god bless those who can understand how chaining promises work.
   async function runTest(){
-    console.log(await imdbApi("ur49546000",))
+    console.log(await imdbApi({user:"ur49546000"},))
     
   };
   // this should not be necessary.
@@ -132,7 +132,7 @@ export default function Main(Prop){
   async function letterboxdApi(config,prev){
     let data = prev || [];
     let page = await axios.get(`https://letterboxd.com/${config.user}/films/by/entry-rating/page/${config.iteration}`);
-      const $ = cheerio.load(page.data);
+      const $ = load(page.data);
       const molist = $('.poster-container'); // this list contains all the components we care about.
       let numOfPages = $('.paginate-pages').children().children().last().text(); // i go two steps above cause on the last iteration the classname changes. )
       molist.each((i,element)=>{
@@ -144,7 +144,8 @@ export default function Main(Prop){
               Link: $(element).find(".poster").attr('data-target-link')
             })
       });
-        
+        console.log(data)
+        // this compares a string to an int. It works thanks to js being itself. Im not casting to int cause idk wanna. DONT MAKE IT A !== OR IT WILL NEVER STOP. 
       if(numOfPages != config.iteration){
           return await letterboxdApi({user:config.user,iteration:config.iteration+1}, data);
       }
@@ -152,7 +153,8 @@ export default function Main(Prop){
         return {Data:data, info:{user:config.user, Pages:numOfPages, TotalMovies:data.length}};
       }
   };
-  let button = "rounded bg-[#2b0071] h-10 w-20 text-center duration-500 hover:h-20 hover:w-40  "
+  // i have no idea why this was here.
+  // let button = "rounded bg-[#2b0071] h-10 w-20 text-center duration-500 hover:h-20 hover:w-40  "
 
   async function imdbApi(config,page,prev){
     let temp
@@ -164,7 +166,7 @@ export default function Main(Prop){
     }else{
       temp = await axios.get("https://www.imdb.com/user/"+config.user+"/ratings?sort=your_rating,desc&ratingFilter=0&mode=detail&ref_=undefined&lastPosition=0")
     }
-    let $ = cheerio.load(temp.data);
+    let $ = load(temp.data);
     let nextPage = $('.list-pagination').find('a.next-page').attr('href')
     const molist = $('.lister-item ');
     console.log(nextPage)
@@ -214,7 +216,7 @@ return(
                   <option value={"letterboxd"}>LETTERBOXD</option>
                   <option value={"imdb"}>IMDB</option>
               </select>
-              <input type="text" className={`rounded bg-white h-10 w-48 ${(pages.user.mode ==='imdb' && !RegexForUR.test(pages.user.name))  ? `border-4 border-red-600`:``}`} onChange={(e)=> setPages((prev) =>{
+              <input placeholder={`${pages.user.mode === "imdb"?"ur":''}`} type="text" className={`rounded bg-white h-10 w-48 ${(pages.user.mode ==='imdb' && !RegexForUR.test(pages.user.name))  ? `border-4 border-red-600`:``}`} onChange={(e)=> setPages((prev) =>{
               let updated = {...prev};
               updated.user.name = e.target.value;
               return updated
@@ -229,7 +231,7 @@ return(
 
           <div className='collectorUser flex flex-col gap-3 items-center  '>
 
-            <select className='w-max rounded bg-[#2b0071] text-white' onChange={(e)=> setPages((prev) =>{
+            <select  className='w-max rounded bg-[#2b0071] text-white' onChange={(e)=> setPages((prev) =>{
               let updated = {...prev};
               updated.other.mode = e.target.value;
               return updated
@@ -239,7 +241,7 @@ return(
                 <option value={"imdb"}>IMDB</option>
             </select>
 
-            <input type="text" className={`rounded bg-white h-10 w-48 ${pages.other.mode ==='imdb' && !RegexForUR.test(pages.other.name) ? `border-4 border-red-600`:``}`}onChange={(e)=> setPages((prev) =>{
+            <input placeholder={`${pages.other.mode === "imdb"?"ur":''}`}type="text" className={`rounded bg-white h-10 w-48 ${pages.other.mode ==='imdb' && !RegexForUR.test(pages.other.name) ? `border-4 border-red-600`:``}`}onChange={(e)=> setPages((prev) =>{
               let updated = {...prev};
               updated.other.name = e.target.value;
               return updated

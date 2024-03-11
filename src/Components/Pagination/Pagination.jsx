@@ -11,7 +11,7 @@ export default function Pagination(prop) {
       document.getElementsByClassName(`visible`)[0].className =`hidden`;
       // im not gonna touch refs after 2 years of not using react.
       // mostly cause i set it up in a way i cant easily.
-      document.getElementById(("page"+p)).className = `m-4 grid grid-cols-6  gap-4 visible`;
+      document.getElementById("page"+p).className = `m-4 grid grid-cols-6  gap-4 visible`;
     };
     function nextPage(){
       console.log("nextPage")
@@ -71,7 +71,7 @@ export default function Pagination(prop) {
         </li>
         {
           prop.pages.map((e,i)=>{
-            return <button  className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-white bg-[#150050] border border-e-4 border-black rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" key={i} onClick={()=>showPage(i)} >{i+1}</button>
+            return <button  className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-white bg-[#150050] border border-e-4 border-black rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" key={i} onClick={()=>showPage(i+1)} >{i+1}</button>
           }
           )
         }
